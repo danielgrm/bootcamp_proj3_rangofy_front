@@ -2,21 +2,20 @@ import React from 'react'
 import { Container, Jumbotron } from 'react-bootstrap'
 import styled from 'styled-components'
 //import styled from 'styled-components'
-import Layout from '../../../components/layout/index'
 
 
 
 const Home = () => {
     return (
         <>
-            <Layout>
+            
                 <Container className="h-100" >
                     <Content>
                     <Jumbotron>
                         <Container>
                             <h1>Bateu um rangão maravilhoso?</h1>
                             <p>
-                            Compartilhe a sua experiência com a gente!
+                            Dá um jóinha e avalie a sua experiência!
     </p>
                         </Container>
                     </Jumbotron>
@@ -39,7 +38,7 @@ const Home = () => {
 
 
 
-            </Layout>
+            
 
         </>
     )

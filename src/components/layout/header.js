@@ -10,12 +10,7 @@ export default () => {
         {
             name: "Ver avaliações",
             icon: "",
-            link: "/avaliacoes"
-        },
-        {
-            name: "Avaliar",
-            icon: "",
-            link: "/avaliar"
+            link: "/ranking"
         }
       
         
@@ -54,6 +49,7 @@ export default () => {
 }
 
 const Header = styled.div`
+margin-bottom: 5rem;
     
     a {
         text-decoration: none;

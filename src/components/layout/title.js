@@ -26,7 +26,7 @@ export default TitlePage
 
 
 const ContainerTitle =styled.div`
-    padding: 30px 0px 30px 0px
+   margin-bottom: 2rem;
 `
 const Title = styled.div`
     h1{
