@@ -2,15 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { Nav, Navbar, Container } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import LogoImg from '../../assets/images/logo.png'
-import { getUser, removeToken } from '../../config/auth'
-import history from '../../config/history'
-import { isAuthenticated } from '../../config/auth'
+import LogoImg from '../../../assets/images/logo.png'
+import { getUser, removeToken } from '../../../config/auth'
+import history from '../../../config/history'
+import { isAuthenticated } from '../../../config/auth'
 import { FaRegUserCircle, FaSignOutAlt } from 'react-icons/fa'
 
-
-
 export default () => {
+
     const isLogged = isAuthenticated()
 
     const logout = () => {
@@ -20,32 +19,30 @@ export default () => {
 
     const menu = [
         {
-            name: "Ver avaliações",
+            name: "Restaurantes",
             icon: "",
-            link: "/ranking"
+            link: "/admin/restaurantes"
         },
         {
-            name: "Avaliar!",
+            name: "Usuários",
             icon: "",
-            link: "/avaliar"
+            link: "/admin/usuarios"
         }
       
         
     ]
     return (
-        <Header>            
+        <Header>
             <Container>
-                {isLogged
+            {isLogged
                 ?  <NavUser><FaRegUserCircle className="icon"/>
                     {getUser().name}
                     <button onClick={logout}><FaSignOutAlt/></button>
                     </NavUser>
                 : ""
                 }
-        
-            
             <Navbar collapseOnSelect expand="lg" variant="light">
-                <NavLink to={'/'}>
+                <NavLink to={'/admin'}>
                 <Navbar.Brand>
                     <Logo>
                     <img src={LogoImg} alt="Asgard Health"/>

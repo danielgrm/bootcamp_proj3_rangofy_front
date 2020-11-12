@@ -1,19 +1,16 @@
 import React, {useState} from 'react'
-import { Container, Card, Button, Col, Row, Form, Dropdown } from 'react-bootstrap'
+import { Container, Card, Button, Col, Row, Form, Dropdown, Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
 import history from '../../../config/history'
-//import styled from 'styled-components'
-
 import { authentication } from '../../../services/auth'
 import  http  from '../../../config/http'
 import { saveToken } from '../../../config/auth'
+//
 
 
-
-
-
-const LoginUser = () => {
+const LoginAdmin = () => {
   const [form, setForm] = useState({})
+  const [loading, setLoading] = useState(false)
 
 
   const handleChange = (attr) => {
@@ -30,19 +27,20 @@ const isFormValid = () =>  form.email && form.senha
 const submitForm = async () => {
   if (isFormValid()) {
     try {
+      setLoading(true)
       const { data } = await authentication(form)
       const { token } = data
       http.defaults.headers["x-auth-token"] = token
       saveToken(data)
-      history.push('/avaliar')
+      history.push('/admin')
     } catch (error) {
       console.log('error', error)
+      setLoading(false)
       
     }
   }
 
 } 
-
 
     return (
         <>
@@ -59,18 +57,16 @@ const submitForm = async () => {
   
     <Form.Group>
     <Form.Label>Email</Form.Label>
-    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""}/>    
+    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""} disabled={loading}/>    
   </Form.Group>
 
   <Form.Group >
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""}/>
+    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""} disabled={loading}/>
   </Form.Group>
-    <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>LOGAR</Button>
+    <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading? (<SpinnerLoading animation="border" size="sm"/>):"LOGAR"}</Button>
     <Dropdown.Divider />
-    <Nav>
-    <Card.Link onClick={()=> history.push('/novo-usuario')}>Ainda não tem conta? Cadastre-se!</Card.Link>
-    </Nav>
+    
     
   </Card.Body>
 </CardLogin>
@@ -95,7 +91,7 @@ const submitForm = async () => {
 
 
 
-export default LoginUser
+export default LoginAdmin
 
 const Content = styled.div`
 align-items: center;
@@ -115,6 +111,7 @@ a{
     }
 `
 const CardLogin = styled(Card)`
+margin-top:10rem;
 border: none;
 .card-header {
   text-align:center;
@@ -157,8 +154,6 @@ border: none;
   
 }
 `
-
-const Nav = styled.div`
-text-align: center;
-background: #FFF;
+const SpinnerLoading = styled(Spinner)`
+background:transparent;
 `

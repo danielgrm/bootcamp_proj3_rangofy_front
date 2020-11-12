@@ -1,12 +1,19 @@
 import React, {useState} from 'react'
-import { Container, Card, Button, Col, Row, Form } from 'react-bootstrap'
+import { Container, Card, Button, Col, Row, Form, Spinner } from 'react-bootstrap'
+import Swal from 'sweetalert2'
 import styled from 'styled-components'
-//import styled from 'styled-components'
+import { addUser } from '../../../services/admin'
+import history from '../../../config/history'
+
+//import styled from 'styled-components'/
 
 
 
 const CreateUser = () => {
-  const [form, setForm] = useState({})
+  const [form, setForm] = useState({
+    is_active: true,
+    is_admin: false
+  })
 
 
   const handleChange = (attr) => {
@@ -18,7 +25,36 @@ const CreateUser = () => {
     return
 }
 
-const isFormValid = () => form.name && form.email && form.password
+const isFormValid = () => form.nome && form.email && form.senha
+
+const [loading, setLoading] = useState(false)
+
+const submitForm = async() => {
+  const message = (type, message) => Swal.fire({
+    position: 'center',
+    //icon: type || 'success',
+    title: message || `Conta criada com sucesso!`,
+    showConfirmButton: false,
+    timer: 2500
+})
+
+  
+    if(isFormValid()){
+      try {
+        setLoading(true)
+        await addUser(form)
+        message('success', `Conta criada com sucesso!`)
+        history.push('/avaliar')
+    
+    
+    
+  } catch (error) {
+    message('error', `Erro ao cadastrar`)
+    setLoading(false)
+    
+  }
+}
+}
 
 
     return (
@@ -35,18 +71,18 @@ const isFormValid = () => form.name && form.email && form.password
   <Card.Body>
   <Form.Group>
     <Form.Label>Nome</Form.Label>
-    <Form.Control type="text" name="name" placeholder="Insira o seu nome" onChange={handleChange} value={form.name || ""}/>    
+    <Form.Control type="text" name="nome" placeholder="Insira o seu nome" onChange={handleChange} value={form.nome || ""} disabled={loading}/>    
   </Form.Group>    
     <Form.Group>
     <Form.Label>Email</Form.Label>
-    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""}/>    
+    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""} disabled={loading}/>    
   </Form.Group>
 
   <Form.Group >
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" name="password" placeholder="Insira o password" onChange={handleChange} value={form.password || ""}/>
+    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""} disabled={loading}/>
   </Form.Group>
-    <Button variant="primary" block disabled={!isFormValid()}>CADASTRAR</Button>
+    <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading? (<SpinnerLoading animation="border" size="sm"/>):"CADASTRAR"}</Button>
   </Card.Body>
 </CardLogin>
     </Col>
@@ -116,4 +152,7 @@ border: none;
   background: #1b314c;
   border: none;
 }
+`
+const SpinnerLoading = styled(Spinner)`
+background:transparent;
 `
