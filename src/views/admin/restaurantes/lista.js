@@ -1,14 +1,17 @@
 import React, { useState, useEffect }from 'react'
 import styled from 'styled-components'
-import TopTitle from '../../../components/layout/title'
 import { listResto } from '../../../services/admin'
 import { Table, Container } from 'react-bootstrap'
+import { BiEditAlt, BiTrash } from 'react-icons/bi'
+import { ImEye } from 'react-icons/im'
+
+
 import Loading from '../../../components/layout/loading'
 
-const Avaliacoes = () => {
-
-const [restoList, setRestoList] = useState([])
-const [isLoading, setIsLoading] = useState(false)
+const ListaRestaurantes = () => {
+ 
+  const [restoList, setRestoList] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
 useEffect(() => {  
   let get = async () => {
@@ -26,48 +29,53 @@ useEffect(() => {
 }, [])
   
 
-const sortByRanking = restoList.filter(function(a,b){
-  if (a.like > a.dislike) {
+const sortByName = restoList.sort(function(a,b){
+  if (a.nome > b.nome) {
     return 1
   }
-  if (a.like < a.dislike) {
+  if (a.nome < b.nome) {
     return -1
   }
   return 0
 })
 
-let index = 1
+
+  
+
 
     return (
         <>        
-                <TopTitle title="Os melhores restaurantes do RJ" subtitle="Segundo os nossos usuários"/>  
+                
                 <Container>
                 {isLoading
                 ? <Loading/>
                 : <TableRating responsive="sm">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    
                     <th>NOME</th>
                     <th>COZINHA</th>
                     <th>BAIRRO</th>
                     <th>INSTAGRAM</th>
                     <th>LIKES</th>
                     <th>DISLIKES</th>
+                    <th>AÇÕES</th>
+                    
                     
                   </tr>
                 </thead>
                 
                 <tbody>
-                {sortByRanking.map((rest, i) => (
+                {sortByName.map((rest, i) => (
                   <tr key={i}>
-                  <td>{index++}</td>
+                  
                   <td>{rest.nome}</td>
                   <td>{rest.cozinha}</td>
                   <td>{rest.endereco}</td>
-                  <td>@botekojambolao</td>
+                  <td>{rest.instagram}</td>
                   <td>{rest.like}</td>
                   <td>{rest.dislike}</td>
+                  <td> <ImEye className="icon"/> <BiEditAlt className="icon"/> <BiTrash className="icon"/> </td>                  
                   
                 </tr>
             
@@ -80,7 +88,6 @@ let index = 1
                 
                 </TableRating>
               }
-                
                 </Container>
                 
             
@@ -91,7 +98,7 @@ let index = 1
 
 
 
-export default Avaliacoes
+export default ListaRestaurantes
 
 const TableRating = styled(Table)`
 th {
@@ -114,7 +121,11 @@ th {
 
 
 .icon {
-  background-color: transparent;
-  color: #212529;
+  font-size: 1.3em;
+  cursor: pointer;
+  :hover{
+      color: #FF4C4C;
+  }
+  
 }
 `

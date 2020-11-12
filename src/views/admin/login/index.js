@@ -2,17 +2,13 @@ import React, {useState} from 'react'
 import { Container, Card, Button, Col, Row, Form, Dropdown, Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
 import history from '../../../config/history'
-//import styled from 'styled-components'
-
 import { authentication } from '../../../services/auth'
 import  http  from '../../../config/http'
 import { saveToken } from '../../../config/auth'
+//
 
 
-
-
-
-const LoginUser = () => {
+const LoginAdmin = () => {
   const [form, setForm] = useState({})
   const [loading, setLoading] = useState(false)
 
@@ -36,7 +32,7 @@ const submitForm = async () => {
       const { token } = data
       http.defaults.headers["x-auth-token"] = token
       saveToken(data)
-      history.push('/avaliar')
+      history.push('/admin')
     } catch (error) {
       console.log('error', error)
       setLoading(false)
@@ -45,7 +41,6 @@ const submitForm = async () => {
   }
 
 } 
-
 
     return (
         <>
@@ -71,9 +66,7 @@ const submitForm = async () => {
   </Form.Group>
     <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading? (<SpinnerLoading animation="border" size="sm"/>):"LOGAR"}</Button>
     <Dropdown.Divider />
-    <Nav>
-    <Card.Link onClick={()=> history.push('/novo-usuario')}>Ainda não tem conta? Cadastre-se!</Card.Link>
-    </Nav>
+    
     
   </Card.Body>
 </CardLogin>
@@ -98,7 +91,7 @@ const submitForm = async () => {
 
 
 
-export default LoginUser
+export default LoginAdmin
 
 const Content = styled.div`
 align-items: center;
@@ -118,6 +111,7 @@ a{
     }
 `
 const CardLogin = styled(Card)`
+margin-top:10rem;
 border: none;
 .card-header {
   text-align:center;
@@ -160,12 +154,6 @@ border: none;
   
 }
 `
-
-const Nav = styled.div`
-text-align: center;
-background: #FFF;
-`
-
 const SpinnerLoading = styled(Spinner)`
 background:transparent;
 `
