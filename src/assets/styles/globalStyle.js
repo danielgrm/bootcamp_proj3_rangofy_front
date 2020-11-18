@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         outline: 0;
         -webkit-font-smoothing: antialiased;
-        background: #e8ecfd;
+        //background: #e8ecfd;
         font-family: 'Questrial', sans-serif;
     }
     

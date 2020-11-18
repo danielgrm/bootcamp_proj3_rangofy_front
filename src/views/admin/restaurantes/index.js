@@ -9,29 +9,32 @@ import styled from 'styled-components'
 
 const Restaurantes = () => {
 
-    const [isForm, setForm] = useState(false)
+    const [isForm, setIsForm] = useState(false)
     const [update, setUpdate] = useState({})
 
-    const updateCategory = (catg) => {
-        setForm(true)
-        setUpdate(catg)
+    const updateResto = (rest) => {
+        setIsForm(true)
+        setUpdate(rest)
     }
 
-
- 
+    const newResto = () => {
+        setUpdate(false)
+        setIsForm(!isForm)
+    } 
  
     return (
         <>        
-                <TopTitle title={isForm ? "Adicionar restaurante" : "Lista de restaurantes" } />  
+                <TopTitle title={isForm ? "Cadastro de restaurantes" : "Lista de restaurantes" } />  
                 <Nav>
-                <Button size="sm" variant="info" onClick={() => setForm(!isForm)}>
-                {isForm ? "LISTA" : "NOVO"}
-                </Button>
+                
+                <Button size="sm" variant="info" onClick={() => newResto()}>{!isForm ? "NOVO" : "LISTA"}</Button>
+                
+                
                 </Nav>
                 
                 { isForm
-                ? <CreateResto/>//<FormCategory update={update} />
-                : <ListaRestaurantes updateCategory={updateCategory} />
+                ? <CreateResto update={update} />
+                : <ListaRestaurantes updateResto={updateResto} />
             }
 
                 

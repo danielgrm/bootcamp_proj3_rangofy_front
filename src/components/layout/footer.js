@@ -50,7 +50,7 @@ color: #1b314c
 const FooterCopy = styled.div`    
     width: 100%;    
     border-top: 3px solid #1b314c;
-    margin-top: 20px;
+    //margin-top: 20px;
     
 
     .RRSS{

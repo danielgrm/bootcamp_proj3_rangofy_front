@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
-import { Container, Card, Button, Col, Row, Form, Dropdown } from 'react-bootstrap'
+import { Container, Card, Button, Col, Row, Form, Dropdown, Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
+import { cadastrarResto, updateResto } from '../../../services/admin'
+import Swal from 'sweetalert2'
 
+const CreateResto = (props) => {
+  const [form, setForm] = useState({
+    ...props.update
+  })
 
-
-
-
-const CreateResto = () => {
-  const [form, setForm] = useState({})
 
 
   const handleChange = (attr) => {
@@ -19,12 +20,47 @@ const CreateResto = () => {
     return
 }
 
+const isUpdate = Object.keys(props.update).length > 0
+
+const typeReq = (data) => isUpdate ? updateResto(props.update._id, data) : cadastrarResto(data)
+
 const isFormValid = () =>  
     form.nome && 
     form.cozinha &&
     form.endereco &&
     form.instagram 
 
+const [loading, setLoading] = useState(false)
+
+const submitForm = async() => {
+
+  const message = (type, message) => Swal.fire({
+     position: 'center',    
+     title: message || `Restaurante cadastrado com sucesso!`,
+     showConfirmButton: false,
+     timer: 2500
+ })
+    
+      
+     if(isFormValid()){
+       try {
+         setLoading(true)
+         await typeReq(form)
+         message('success', `Restaurante cadastrado com sucesso!`)
+         setLoading(false)
+         setForm({})
+         
+        
+        
+        
+       } catch (error) {
+        message('error', `Erro ao cadastrar`)
+        setLoading(false)
+        setForm({})
+        
+      }
+    }
+    }
 
     return (
         <>
@@ -59,7 +95,7 @@ const isFormValid = () =>
     <Form.Label>INSTAGRAM</Form.Label>
     <Form.Control type="text" name="instagram" placeholder="@userinstarest" onChange={handleChange} value={form.instagram || ""}/>
   </Form.Group>
-    <Button variant="primary" block disabled={!isFormValid()}>ENVIAR</Button>
+    <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading? (<SpinnerLoading animation="border" size="sm"/>):"ENVIAR"}</Button>    
     <Dropdown.Divider />
             </ColForm>
             <ColForm xs={6} md={3}>
@@ -149,4 +185,8 @@ border: none;
 `
 const ColForm = styled(Col)`
     background: #FFF;
+`
+
+const SpinnerLoading = styled(Spinner)`
+background:transparent;
 `

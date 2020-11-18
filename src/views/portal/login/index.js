@@ -55,7 +55,7 @@ const submitForm = async () => {
                     <Row>
     <Col></Col>
 
-    <Col>    
+    <Col xs={10} sm ={6} xl={4}>    
     <CardLogin >
   <Card.Header>LOGIN</Card.Header>
   <Card.Body>
@@ -102,6 +102,7 @@ export default LoginUser
 
 const Content = styled.div`
 align-items: center;
+padding-top: 5rem;
 
 a{
   :hover {

@@ -7,12 +7,14 @@ import styled from 'styled-components'
 const Layout = ({ children }) =>{
     return (
         <>
-        <Header/>
         <Content>
+        <Header/>
+        <Main>
             { children }
-        </Content>
+        </Main>
         
         <Footer/>
+        </Content>
         </>
 
     )
@@ -21,7 +23,15 @@ const Layout = ({ children }) =>{
 export default Layout
 
 const Content = styled.div`
-    min-height: 500px;
-    background: #e8ecfd;
+background: #e8ecfd;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+`
+
+
+const Main = styled.div`
+    flex: 1 0 auto;
+    min-height: 400px;
 
 `

@@ -26,7 +26,8 @@ export default TitlePage
 
 
 const ContainerTitle =styled.div`
-   margin-bottom: 2rem;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 `
 const Title = styled.div`
     h1{

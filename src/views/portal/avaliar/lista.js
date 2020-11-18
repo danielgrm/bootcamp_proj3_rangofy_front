@@ -1,22 +1,22 @@
 import React, { useState, useEffect }from 'react'
 import styled from 'styled-components'
 import TopTitle from '../../../components/layout/title'
-import { listResto } from '../../../services/admin'
-import { Table, Container, ButtonGroup, ToggleButton } from 'react-bootstrap'
+import { listResto, like } from '../../../services/admin'
+import { Table, Container, Button} from 'react-bootstrap'
 import { BiLike, BiDislike } from 'react-icons/bi'
 import Loading from '../../../components/layout/loading'
+//import { getUser } from '../../../config/auth'
+//import { useParams } from 'react-router-dom'
 
 
 const Avaliacoes = () => {
 
 
-
-  const [checked, setChecked] = useState(false);
-  const [radioValue, setRadioValue] = useState('1');
-
   const [restoList, setRestoList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
+  
+ 
 useEffect(() => {  
   let get = async () => {
     setIsLoading(true)
@@ -44,12 +44,6 @@ const sortByName = restoList.sort(function(a,b){
 })
 
 
-  const radios = [
-    { name: <BiLike className="icon"/>, value: '1' },
-    { name: <BiDislike className="icon"/>, value: '2' },
-    
-  ];
-
 
     return (
         <>        
@@ -58,6 +52,8 @@ const sortByName = restoList.sort(function(a,b){
                 {isLoading
                 ? <Loading/>
                 : <TableRating responsive="sm">
+                  {/*<input name="_id" type="hidden" onChange={handleChange} value={form.getUser().id}/>
+                  <input name="email" type="hidden" onChange={handleChange} value={form.getUser().email}/>*/}
                 <thead>
                   <tr>
                     
@@ -78,22 +74,8 @@ const sortByName = restoList.sort(function(a,b){
                   <td>{rest.nome}</td>
                   <td>{rest.cozinha}</td>
                   <td>{rest.endereco}</td>
-                  <td>@botekojambolao</td>
-                  <td><ButtonGroup toggle>
-                      {radios.map((radio, idx) => (
-                      <ToggleButton
-                        key={idx}
-                        type="radio"
-                        variant="info"
-                        name="radio"
-                        value={radio.value}
-                        checked= {radioValue === radio.value}
-                        onChange={(e) => setRadioValue(e.currentTarget.value)}
-                      >
-                      {radio.name}
-                      </ToggleButton>
-                      ))}
-                      </ButtonGroup></td>                 
+                  <td>{rest.instagram}</td>
+                  <td><Button variant="info" onClick={() => like()}><BiLike className="icon"/></Button><Button variant="danger"><BiDislike className="icon"/></Button></td>                 
                   
                 </tr>
             
@@ -103,6 +85,7 @@ const sortByName = restoList.sort(function(a,b){
                 
               </tbody>
               
+
                 
                 </TableRating>
               }
@@ -124,9 +107,10 @@ th {
 }  
 
 .btn {
-  padding: 0.3rem;
+  margin-left: 0.2rem;
+  padding: 0.1rem;
   font-size: 1.5rem;
-  background: transparent;
+  //background: transparent;
   border: none;
   
 }

@@ -75,7 +75,8 @@ export default () => {
 }
 
 const Header = styled.div`
-margin-bottom: 3rem;
+//margin-bottom: 3rem;
+background: #e8ecfd;
 
     
     a {
@@ -142,6 +143,7 @@ const NavUser = styled.div`
         
     }
     button {
+        background: transparent;
         border: none;
         margin-left: 0.5rem;
         :hover {
