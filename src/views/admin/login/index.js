@@ -50,7 +50,7 @@ const submitForm = async () => {
                     <Row>
     <Col></Col>
 
-    <Col>    
+    <Col xs={10} sm ={6} xl={4}>    
     <CardLogin >
   <Card.Header>LOGIN</Card.Header>
   <Card.Body>
@@ -94,7 +94,10 @@ const submitForm = async () => {
 export default LoginAdmin
 
 const Content = styled.div`
+
+height: 100vh;
 align-items: center;
+
 
 a{
   :hover {
@@ -112,7 +115,8 @@ a{
 `
 const CardLogin = styled(Card)`
 margin-top:10rem;
-border: none;
+border: 1px solid #1b314c;
+border-radius: 0px;
 .card-header {
   text-align:center;
   background: #fff;

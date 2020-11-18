@@ -1,69 +1,70 @@
 import React, { useState, useEffect }from 'react'
 import styled from 'styled-components'
-import { listResto } from '../../../services/admin'
+import { getUser } from '../../../services/admin'
 import { Table, Container } from 'react-bootstrap'
-import { BiEditAlt, BiTrash } from 'react-icons/bi'
-import { ImEye } from 'react-icons/im'
-import { deleteRestoID } from '../../../services/admin'
+import TopTitle from '../../../components/layout/title'
+import { BiTrash } from 'react-icons/bi'
+//import { ImEye } from 'react-icons/im'
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
+import { deleteUserID } from '../../../services/admin'
 import Swal from 'sweetalert2'
-import history from '../../../config/history'
 
 
 import Loading from '../../../components/layout/loading'
 
-const ListaRestaurantes = (props) => {
+const ListaUsers= () => {
  
-  const [restoList, setRestoList] = useState([])
+  const [userList, setUserList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isUpdate, setUpdate] = useState(false)
 
 useEffect(() => {  
-    setUpdate(false)
-    let get = async () => {
+  setUpdate(false)
+  let get = async () => {
     setIsLoading(true)
-    const resto = await listResto() 
-    setRestoList(resto.data)
+    const user = await getUser() 
+    setUserList(user.data)
     setIsLoading(false)
   }
   
   if (!isUpdate) {
     get()
 }
-
+  
   return () => get = () => {
   }
   
 }, [isUpdate])
 
-const deleteResto = async (rest) => {
+
+const deleteUser = async (user) => {
   const message = (type, message) => Swal.fire({
       position: 'center',
       //icon: type || 'success',
-      title: message || `Categoria excluída com sucesso.`,
+      title: message || `Usuário excluído com sucesso.`,
       showConfirmButton: false,
       timer: 2500
   })
 
   Swal.fire({
-      title: `Deseja exluir o restaurante ${rest.nome} ?`,
+      title: `Deseja exluir o usuário ${user.nome} ?`,
       showCancelButton: true,
       confirmButtonText: `Sim`,
       cancelButtonText: `Não`,
   }).then((result) => {
       if (result.isConfirmed) {
-        deleteRestoID(rest._id)
+        deleteUserID(user._id)
               .then(() => {
                   setUpdate(true)
-                  message('success', `Restaurante ${rest.nome} excluído com sucesso.`)
+                  message('success', `Usuário ${user.nome} excluído com sucesso.`)
               })
-              .catch(() => message('danger', `Erro ao excluir o restaurante`))
+              .catch(() => message('danger', `Erro ao excluir o usuário`))
       }
   })
 }
-
   
 
-const sortByName = restoList.sort(function(a,b){
+const sortByName = userList.sort(function(a,b){
   if (a.nome > b.nome) {
     return 1
   }
@@ -74,25 +75,24 @@ const sortByName = restoList.sort(function(a,b){
 })
 
 
-const restoProfile = (rest) => history.push(`restaurantes/${rest._id}`)  
+  
 
 
     return (
-        <>        
+                
                 
                 <Container>
                 {isLoading
                 ? <Loading/>
-                : <TableRating responsive="sm">
+                : <>
+                <TopTitle title="Lista de usuários" />   
+                <TableRating responsive="sm">
                 <thead>
                   <tr>
                     
                     <th>NOME</th>
-                    <th>COZINHA</th>
-                    <th>BAIRRO</th>
-                    <th>INSTAGRAM</th>
-                    <th>LIKES</th>
-                    <th>DISLIKES</th>
+                    <th>E-MAIL</th>
+                    <th>ADMIN</th>                    
                     <th>AÇÕES</th>
                     
                     
@@ -100,16 +100,13 @@ const restoProfile = (rest) => history.push(`restaurantes/${rest._id}`)
                 </thead>
                 
                 <tbody>
-                {sortByName.map((rest, i) => (
+                {sortByName.map((user, i) => (
                   <tr key={i}>
                   
-                  <td>{rest.nome}</td>
-                  <td>{rest.cozinha}</td>
-                  <td>{rest.endereco}</td>
-                  <td>{rest.instagram}</td>
-                  <td>{rest.userlike.length}</td>
-                  <td>{rest.userdislike.length}</td>
-                  <td> <ImEye className="icon" onClick={() => restoProfile(rest)}/> <BiEditAlt className="icon" onClick={() => props.updateResto(rest)}/> <BiTrash className="icon" onClick={() => deleteResto(rest)}/> </td>                  
+                  <td>{user.nome}</td>
+                  <td>{user.email}</td>
+                  <td>{user.isadmin ? <FaCheckCircle/> : <FaTimesCircle/>}</td>                  
+                  <td> <BiTrash className="icon" onClick={() => deleteUser(user)}/> </td>                  
                   
                 </tr>
             
@@ -121,18 +118,20 @@ const restoProfile = (rest) => history.push(`restaurantes/${rest._id}`)
               
                 
                 </TableRating>
+                </>
               }
                 </Container>
                 
             
            
-        </>
+                
     )
 }
 
 
 
-export default ListaRestaurantes
+
+export default ListaUsers
 
 const TableRating = styled(Table)`
 th {
@@ -161,8 +160,5 @@ th {
       color: #FF4C4C;
   }
   
-.swal2-header {
-  background: #000;
-}
 }
 `

@@ -38,6 +38,8 @@ const Dash = () => {
 export default Dash
 
 const Content = styled.div`
+padding-top: 5rem;
+
     .jumbotron{
         background: none;
         text-align:center;
