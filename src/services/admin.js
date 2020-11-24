@@ -26,10 +26,10 @@ const updateResto = (id, data) => http.patch(`/admin/resto/${id}`, data)
 const deleteRestoID = (id) => http.delete(`/admin/resto/${id}`)
 
 //POST like by id
-const like = (id) => http.post(`/like/${id}`)
+const like = (id) => http.post(`/likes/${id}`)
 
 //POST like by id
-const dislike = (id) => http.post(`/dislike/${id}`)
+const dislike = (id) => http.post(`/dislikes/${id}`)
 
 
 

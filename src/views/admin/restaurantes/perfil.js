@@ -30,13 +30,17 @@ useEffect(() => {
   
 }, [_id])
 
+//const likes = restoProfile.map(item => item.userlike)
 
   
+ const likes = [restoProfile.userlike]
+ console.log(likes)
+
+ 
 
 
     return (
-        <>        
-                
+        <>                  
                 <Container>
                 {isLoading
                 ? <Loading/>                
@@ -44,22 +48,21 @@ useEffect(() => {
                 <TopTitle title={restoProfile.nome} subtitle={restoProfile.instagram}/>
                 <TableRating responsive="sm">
                 <thead>
-                  <tr>
-                    
+                  <tr>                    
                     <th>LIKES</th>
                     <th>DISLIKES</th>
                   </tr>
                 </thead>                
                 <tbody>
                     
-                    {/*restoProfile.map((user, i) => (
-                        <tr key={i}>
-                        <td>{user.userdislike}</td>
-                        </tr>
-
-                    ))*/}
-                    
-                  <td></td>                  
+                {likes.map((likes, i) => (
+                <tr key={i}>
+                  <td>{likes}</td>
+                </tr>
+                ))}
+                   
+                  
+                                 
                 
               </tbody>               
                 </TableRating>

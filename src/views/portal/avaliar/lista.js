@@ -1,12 +1,13 @@
 import React, { useState, useEffect }from 'react'
 import styled from 'styled-components'
 import TopTitle from '../../../components/layout/title'
-import { listResto, like } from '../../../services/admin'
+import { listResto, like, dislike } from '../../../services/admin'
 import { Table, Container, Button} from 'react-bootstrap'
 import { BiLike, BiDislike } from 'react-icons/bi'
 import Loading from '../../../components/layout/loading'
-//import { getUser } from '../../../config/auth'
-//import { useParams } from 'react-router-dom'
+import { getUser } from '../../../config/auth'
+
+
 
 
 const Avaliacoes = () => {
@@ -14,8 +15,34 @@ const Avaliacoes = () => {
 
   const [restoList, setRestoList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-
+  const [form, setForm] = useState({})
   
+ const email = getUser().email
+  
+    
+  const darLike = async (id) => {
+    try {
+      setForm({
+        ...form,
+        email : email
+    })
+      await like(id)
+     
+
+     
+      console.log('dando like')
+      
+    } catch (error) {
+      
+    }
+           
+    
+  }
+
+  const darDislike = async (id) => {
+    const dislikeID = await dislike(id)
+    console.log(dislikeID)
+  }
  
 useEffect(() => {  
   let get = async () => {
@@ -46,14 +73,14 @@ const sortByName = restoList.sort(function(a,b){
 
 
     return (
-        <>        
+        <>      
+              {/*<input name="email" type="hidden"  value={form.email}/>*/}
                 <TopTitle title="Participe!" subtitle="Avalie os restaurantes que você conhece"/>  
                 <Container>
                 {isLoading
                 ? <Loading/>
                 : <TableRating responsive="sm">
-                  {/*<input name="_id" type="hidden" onChange={handleChange} value={form.getUser().id}/>
-                  <input name="email" type="hidden" onChange={handleChange} value={form.getUser().email}/>*/}
+                  
                 <thead>
                   <tr>
                     
@@ -75,7 +102,7 @@ const sortByName = restoList.sort(function(a,b){
                   <td>{rest.cozinha}</td>
                   <td>{rest.endereco}</td>
                   <td>{rest.instagram}</td>
-                  <td><Button variant="info" onClick={() => like()}><BiLike className="icon"/></Button><Button variant="danger"><BiDislike className="icon"/></Button></td>                 
+                  <td><Button variant="info" onClick={() => darLike(rest._id)}><BiLike className="icon"/></Button><Button variant="danger"><BiDislike onClick={() => darDislike(rest._id)} className="icon"/></Button></td>                 
                   
                 </tr>
             

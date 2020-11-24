@@ -27,11 +27,12 @@ useEffect(() => {
   
 
 const sortByRanking = restoList.filter(function(a){
+ 
 
   if (a.userlike.length > a.userdislike.length ) {
     return 1
   }
-  if (a.userlike.length  < a.userdislike.length ) {
+  if (a.userlike.length < a.userdislike.length ) {
     return -1
   }
   return 0
@@ -67,8 +68,8 @@ let index = 1
                   <td>{rest.cozinha}</td>
                   <td>{rest.endereco}</td>
                   <td>{rest.instagram}</td>
-                  <td>{rest.userlike.length.toString()}</td>
-                  <td>{rest.userdislike.length.toString()}</td>
+                  <td>{rest.userlike.length}</td>
+                  <td>{rest.userdislike.length}</td>
                   
                 </tr>
             
