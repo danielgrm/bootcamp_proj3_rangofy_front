@@ -55,8 +55,8 @@ useEffect(() => {
                 </thead>                
                 <tbody>
                     
-                {likes.map((likes, i) => (
-                <tr key={i}>
+                {likes.map((likes) => (
+                <tr key={likes}>
                   <td>{likes}</td>
                 </tr>
                 ))}

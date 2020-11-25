@@ -5,45 +5,14 @@ import { listResto, like, dislike } from '../../../services/admin'
 import { Table, Container, Button} from 'react-bootstrap'
 import { BiLike, BiDislike } from 'react-icons/bi'
 import Loading from '../../../components/layout/loading'
-import { getUser } from '../../../config/auth'
-
-
-
+import Swal from 'sweetalert2'
 
 const Avaliacoes = () => {
 
-
   const [restoList, setRestoList] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [form, setForm] = useState({})
-  
- const email = getUser().email
-  
-    
-  const darLike = async (id) => {
-    try {
-      setForm({
-        ...form,
-        email : email
-    })
-      await like(id)
+  const [isLoading, setIsLoading] = useState(false)   
      
-
-     
-      console.log('dando like')
-      
-    } catch (error) {
-      
-    }
-           
-    
-  }
-
-  const darDislike = async (id) => {
-    const dislikeID = await dislike(id)
-    console.log(dislikeID)
-  }
- 
+  
 useEffect(() => {  
   let get = async () => {
     setIsLoading(true)
@@ -71,10 +40,44 @@ const sortByName = restoList.sort(function(a,b){
 })
 
 
+const darLike = async (id) => {
+  const message = (message) => Swal.fire({
+    position: 'center',    
+    title: message,
+    showConfirmButton: false,
+    timer: 2000
+  })   
+  try {      
+    await like(id) 
+    message(`Like! :)`)    
+      
+  } catch (error) {
+    message(`Ocorreu um erro..`)      
+  }        
+  
+}
+
+const darDislike = async (id) => {
+  const message = (message) => Swal.fire({
+    position: 'center',    
+    title: message,
+    showConfirmButton: false,
+    timer: 2000
+  })   
+  try {      
+    await dislike(id)
+    message(`Dislike... :(`)       
+        
+  } catch (error) {      
+    message(`Ocorreu um erro..`) 
+  }        
+  
+}
+
+
 
     return (
-        <>      
-              {/*<input name="email" type="hidden"  value={form.email}/>*/}
+        <>                    
                 <TopTitle title="Participe!" subtitle="Avalie os restaurantes que você conhece"/>  
                 <Container>
                 {isLoading

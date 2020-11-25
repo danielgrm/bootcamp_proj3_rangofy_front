@@ -26,13 +26,12 @@ useEffect(() => {
 }, [])
   
 
-const sortByRanking = restoList.filter(function(a){
+const sortByRanking = restoList.sort(function(a, b){
  
-
-  if (a.userlike.length > a.userdislike.length ) {
+  if (a.userlike.toString() > a.userdislike.toString() ) {
     return 1
   }
-  if (a.userlike.length < a.userdislike.length ) {
+  if (a.userlike.toString() < a.userdislike.toString() ) {
     return -1
   }
   return 0
