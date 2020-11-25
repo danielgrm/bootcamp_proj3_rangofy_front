@@ -5,8 +5,6 @@ import history from '../../../config/history'
 import { authentication } from '../../../services/auth'
 import  http  from '../../../config/http'
 import { saveToken } from '../../../config/auth'
-//
-
 
 const LoginAdmin = () => {
   const [form, setForm] = useState({})
@@ -42,6 +40,8 @@ const submitForm = async () => {
 
 } 
 
+const pressEnter = (event) => event.key === 'Enter' ? submitForm() : null
+
     return (
         <>
             
@@ -57,12 +57,12 @@ const submitForm = async () => {
   
     <Form.Group>
     <Form.Label>Email</Form.Label>
-    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""} disabled={loading}/>    
+    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""} disabled={loading} onKeyPress={pressEnter}/>    
   </Form.Group>
 
   <Form.Group >
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""} disabled={loading}/>
+    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""} disabled={loading} onKeyPress={pressEnter}/>
   </Form.Group>
     <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading? (<SpinnerLoading animation="border" size="sm"/>):"LOGAR"}</Button>
     <Dropdown.Divider />

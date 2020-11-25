@@ -9,8 +9,6 @@ const CreateResto = (props) => {
     ...props.update
   })
 
-
-
   const handleChange = (attr) => {
     const { value, name } = attr.target
     setForm({
@@ -34,13 +32,12 @@ const [loading, setLoading] = useState(false)
 
 const submitForm = async() => {
 
-  const message = (type, message) => Swal.fire({
-     position: 'center',    
-     title: message || `Restaurante cadastrado com sucesso!`,
-     showConfirmButton: false,
-     timer: 2500
- })
-    
+const message = (type, message) => Swal.fire({
+   position: 'center',    
+   title: message || `Restaurante cadastrado com sucesso!`,
+   showConfirmButton: false,
+   timer: 2500
+ })   
       
      if(isFormValid()){
        try {
@@ -48,10 +45,7 @@ const submitForm = async() => {
          await typeReq(form)
          message('success', `Restaurante cadastrado com sucesso!`)
          setLoading(false)
-         setForm({})
-         
-        
-        
+         setForm({})       
         
        } catch (error) {
         message('error', `Erro ao cadastrar`)
@@ -63,66 +57,43 @@ const submitForm = async() => {
     }
 
     return (
-        <>
-            
-                <Container className="h-100" >
-                    <Content>
+        <>            
+        <Container className="h-100" >
+          <Content>
+            <Row>
+              <Col>
+                <CardResto >
+                  <Card.Body>
                     <Row>
-    
-
-    <Col>    
-    <CardResto >  
-  <Card.Body>
-  <Row>
-            <ColForm xs={6} md={3}>
-              
-            </ColForm>
-            <ColForm xs={6} md={6}>
-            <Form.Group>
-    <Form.Label>NOME</Form.Label>
-    <Form.Control type="text" name="nome" placeholder="Nome do restaurante" onChange={handleChange} value={form.nome || ""}/>    
-  </Form.Group>
-
-  <Form.Group >
-    <Form.Label>COZINHA</Form.Label>
-    <Form.Control type="text" name="cozinha" placeholder="Tipo de cozinha" onChange={handleChange} value={form.cozinha || ""}/>
-  </Form.Group>
-  <Form.Group >
-    <Form.Label>BAIRRO</Form.Label>
-    <Form.Control type="text" name="endereco" placeholder="Bairro do restaurante" onChange={handleChange} value={form.endereco || ""}/>
-  </Form.Group>
-  <Form.Group >
-    <Form.Label>INSTAGRAM</Form.Label>
-    <Form.Control type="text" name="instagram" placeholder="@userinstarest" onChange={handleChange} value={form.instagram || ""}/>
-  </Form.Group>
-    <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading? (<SpinnerLoading animation="border" size="sm"/>):"ENVIAR"}</Button>    
-    <Dropdown.Divider />
-            </ColForm>
-            <ColForm xs={6} md={3}>
-              
-            </ColForm>
-          </Row>
-  
-    
-    
-    
-  </Card.Body>
-</CardResto>
-    </Col>
-    
-  </Row>
-                    
-                    
-
-                    </Content>
-                    
-
-                </Container>
-
-
-
-            
-
+                      <ColForm xs={6} md={3}/>
+                      <ColForm xs={6} md={6}>
+                        <Form.Group>
+                          <Form.Label>NOME</Form.Label>
+                          <Form.Control type="text" name="nome" placeholder="Nome do restaurante" onChange={handleChange} value={form.nome || ""} />
+                        </Form.Group>
+                        <Form.Group >
+                          <Form.Label>COZINHA</Form.Label>
+                          <Form.Control type="text" name="cozinha" placeholder="Tipo de cozinha" onChange={handleChange} value={form.cozinha || ""} />
+                        </Form.Group>
+                        <Form.Group >
+                          <Form.Label>BAIRRO</Form.Label>
+                          <Form.Control type="text" name="endereco" placeholder="Bairro do restaurante" onChange={handleChange} value={form.endereco || ""} />
+                        </Form.Group>
+                        <Form.Group >
+                          <Form.Label>INSTAGRAM</Form.Label>
+                          <Form.Control type="text" name="instagram" placeholder="@userinstarest" onChange={handleChange} value={form.instagram || ""} />
+                        </Form.Group>
+                        <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading ? (<SpinnerLoading animation="border" size="sm" />) : "ENVIAR"}</Button>
+                        <Dropdown.Divider />
+                      </ColForm>
+                      <ColForm xs={6} md={3}/>                      
+                    </Row>
+                  </Card.Body>
+                </CardResto>
+              </Col>
+            </Row>
+          </Content>
+        </Container>
         </>
     )
 }

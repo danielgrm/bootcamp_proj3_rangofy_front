@@ -18,9 +18,10 @@ const getUser = () => {
     return false
 }
 
-const saveToken = (data) => localStorage.setItem(TOKEN_KEY, JSON.stringify(data));
+const saveToken = (data) => localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
 
-const removeToken = () => localStorage.removeItem(TOKEN_KEY);
+
+const removeToken = () => localStorage.removeItem(TOKEN_KEY)
 
 const isAuthenticated = () => {
 

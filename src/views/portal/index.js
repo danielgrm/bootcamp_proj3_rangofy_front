@@ -8,13 +8,14 @@ import Login from './login'
 import Ranking from './ranking'
 import Avaliar from './avaliar'
 
-export default (props) => {
-    const UserRoute = ({ ...rest }) => {
-        if (!isAuthenticated) {
-            return <Redirect to='/logar'/>
-        }
-        return <Route { ... rest }/>
+const UserRoute = ({ ...rest }) => {
+    if (!isAuthenticated) {
+        return <Redirect to='/logar'/>
     }
+    return <Route { ... rest }/>
+}
+
+export default (props) => {    
 
 
     return(
