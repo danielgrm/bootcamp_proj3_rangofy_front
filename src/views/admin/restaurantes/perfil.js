@@ -1,81 +1,94 @@
-import React, { useState, useEffect }from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { listRestoID } from '../../../services/admin'
-import { Table, Container } from 'react-bootstrap'
+import { Table, Container, Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import Loading from '../../../components/layout/loading'
 import TopTitle from '../../../components/layout/title'
 
 
 const PerfilRestaurante = (props) => {
- 
-  const [restoProfile, setRestoProfile] = useState([])
+
+  const [restoProfile, setRestoProfile] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const { _id } = useParams()
- 
 
-useEffect(() => {  
-    
+
+  useEffect(() => {
+
     let get = async () => {
-    setIsLoading(true)
-    const resto = await listRestoID(_id) 
-    setRestoProfile(resto.data)
-    setIsLoading(false)
-  }
-    
+      setIsLoading(true)
+      const resto = await listRestoID(_id)
+      setRestoProfile(resto.data)
+      setIsLoading(false)
+    }
+
     get()
 
-  return () => get = () => {
+    return () => get = () => {
+    }
+
+  }, [_id])
+
+
+  const mountUserLike = (data) => {
+    if (data.userlike) {
+
+      return data.userlike.map((it, i) =>
+        <tr key={i}>
+          <td>{it.email}</td>
+        </tr>)
+    }
   }
-  
-}, [_id])
 
-//const likes = restoProfile.map(item => item.userlike)
+  const mountUserDislike = (data) => {
+    if (data.userdislike) {
 
-  
- const likes = [restoProfile.userlike]
- console.log(likes)
+      return data.userdislike.map((it, i) =>
+        <tr key={i}>
+          <td>{it.email}</td>
+        </tr>)
+    }
+  }
 
- 
-
-
-    return (
-        <>                  
-                <Container>
-                {isLoading
-                ? <Loading/>                
-                : <> 
-                <TopTitle title={restoProfile.nome} subtitle={restoProfile.instagram}/>
+  return (
+    <>
+      <Container>
+        {isLoading
+          ? <Loading />
+          : <>
+            <TopTitle title={restoProfile.nome} subtitle={restoProfile.instagram} />
+            <Row>
+              <Col sm={6}>
                 <TableRating responsive="sm">
-                <thead>
-                  <tr>                    
-                    <th>LIKES</th>
-                    <th>DISLIKES</th>
-                  </tr>
-                </thead>                
-                <tbody>
-                    
-                {likes.map((likes) => (
-                <tr key={likes}>
-                  <td>{likes}</td>
-                </tr>
-                ))}
-                   
-                  
-                                 
-                
-              </tbody>               
+                  <thead>
+                    <tr>
+                      <th>LIKES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mountUserLike(restoProfile)}
+                  </tbody>
                 </TableRating>
-                </>
-                
-               
-              }
-                </Container>
-                
-            
-           
-        </>
-    )
+              </Col>
+              <Col sm={6}>
+                <TableRating responsive="sm">
+                  <thead>
+                    <tr>
+                      <th>DISLIKES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mountUserDislike(restoProfile)}
+                  </tbody>
+                </TableRating>
+              </Col>
+            </Row>
+          </>
+        }
+      </Container>
+    </>
+  )
 }
 
 

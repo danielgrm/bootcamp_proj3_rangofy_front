@@ -41,7 +41,8 @@ export default () => {
 
 const Footer = styled.div`
 background: #e8ecfd;
-color: #1b314c
+color: #212529;
+    
 
 `
 

@@ -124,7 +124,7 @@ background: #e8ecfd;
     }
 
     .navbar-nav .nav-link{
-        color: #1b314c;
+        color: #212529;
     }
 
    
@@ -134,6 +134,9 @@ const Logo = styled.div`
     font-size: 1.8em;
     display:flex;
     align-items: center;
+    span { 
+        color: #212529;
+    }
 `
 const NavUser = styled.div`
     text-align: right;

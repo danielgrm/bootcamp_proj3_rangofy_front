@@ -25,19 +25,26 @@ useEffect(() => {
   
 }, [])
   
+//<td>{rest.userlike.length}</td>
+//<td>{rest.userdislike.length}</td>
 
 const sortByRanking = restoList.sort(function(a, b){
- 
-  if (a.userlike.toString() > a.userdislike.toString() ) {
-    return 1
-  }
-  if (a.userlike.toString() < a.userdislike.toString() ) {
+  
+   
+  if (a.userlike.length > b.userlike.length) {
     return -1
   }
-  return 0
+  if (a.userlike.length < b.userlike.length) {
+    return 1
+  }
+
+   return 0
+ 
+  
 })
 
 let index = 1
+
 
     return (
         <>        
@@ -69,6 +76,7 @@ let index = 1
                   <td>{rest.instagram}</td>
                   <td>{rest.userlike.length}</td>
                   <td>{rest.userdislike.length}</td>
+                  <td id="ranking" className="ranking">{rest.userlike.length - rest.userdislike.length}</td>
                   
                 </tr>
             
@@ -117,5 +125,9 @@ th {
 .icon {
   background-color: transparent;
   color: #212529;
+}
+
+.ranking{
+  display: none;
 }
 `
