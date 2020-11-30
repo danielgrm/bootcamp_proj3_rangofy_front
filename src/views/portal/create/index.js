@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { addUser } from '../../../services/admin'
 import history from '../../../config/history'
 
-//import styled from 'styled-components'/
+//
 
 
 
@@ -56,6 +56,7 @@ const submitForm = async() => {
 }
 }
 
+const pressEnter = (event) => event.key === 'Enter' ? submitForm() : null
 
 
     return (
@@ -72,16 +73,16 @@ const submitForm = async() => {
   <Card.Body>
   <Form.Group>
     <Form.Label>Nome</Form.Label>
-    <Form.Control type="text" name="nome" placeholder="Insira o seu nome" onChange={handleChange} value={form.nome || ""} disabled={loading}/>    
+    <Form.Control type="text" name="nome" placeholder="Insira o seu nome" onChange={handleChange} value={form.nome || ""} disabled={loading} onKeyPress={pressEnter}/>    
   </Form.Group>    
     <Form.Group>
     <Form.Label>Email</Form.Label>
-    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""} disabled={loading}/>    
+    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""} disabled={loading} onKeyPress={pressEnter}/>    
   </Form.Group>
 
   <Form.Group >
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""} disabled={loading}/>
+    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""} disabled={loading} onKeyPress={pressEnter}/>
   </Form.Group>
     <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading? (<SpinnerLoading animation="border" size="sm"/>):"CADASTRAR"}</Button>
   </Card.Body>
