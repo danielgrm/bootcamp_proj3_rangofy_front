@@ -9,7 +9,7 @@ const Dash = () => {
     return (
         <>
             
-                <Container className="h-100" >
+                <Container >
                     <Content>
                     <Jumbotron>
                         <Container>
@@ -38,7 +38,12 @@ const Dash = () => {
 export default Dash
 
 const Content = styled.div`
+//height: 100%;
 padding-top: 5rem;
+
+.container{
+    
+}
 
     .jumbotron{
         background: none;

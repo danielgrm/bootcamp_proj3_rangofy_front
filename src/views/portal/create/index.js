@@ -111,6 +111,7 @@ export default CreateUser
 
 const Content = styled.div`
 align-items: center;
+padding-top: 5rem;
     
     h1{
         font-family: 'Archivo Black', sans-serif;

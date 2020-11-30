@@ -5,6 +5,7 @@ import { listResto } from '../../../services/admin'
 import { Table, Container } from 'react-bootstrap'
 import Loading from '../../../components/layout/loading'
 
+
 const Avaliacoes = () => {
 
 const [restoList, setRestoList] = useState([])
@@ -25,12 +26,9 @@ useEffect(() => {
   
 }, [])
   
-//<td>{rest.userlike.length}</td>
-//<td>{rest.userdislike.length}</td>
 
-const sortByRanking = restoList.sort(function(a, b){
-  
-   
+const sortByRanking = restoList.sort(function(a, b){   
+
   if (a.userlike.length > b.userlike.length) {
     return -1
   }
@@ -38,7 +36,7 @@ const sortByRanking = restoList.sort(function(a, b){
     return 1
   }
 
-   return 0
+    return 0
  
   
 })
@@ -75,8 +73,9 @@ let index = 1
                   <td>{rest.endereco}</td>
                   <td>{rest.instagram}</td>
                   <td>{rest.userlike.length}</td>
-                  <td>{rest.userdislike.length}</td>
-                  <td id="ranking" className="ranking">{rest.userlike.length - rest.userdislike.length}</td>
+                  <td>{rest.userdislike.length}</td>                 
+                  {/*<td id="ranking" className="ranking">{(3 * rest.userlike.length) - rest.userdislike.length}</td>*/}
+                  
                   
                 </tr>
             
@@ -88,6 +87,7 @@ let index = 1
               
                 
                 </TableRating>
+                
               }
                 
                 </Container>
@@ -128,6 +128,6 @@ th {
 }
 
 .ranking{
-  display: none;
+  //display: none;
 }
 `
