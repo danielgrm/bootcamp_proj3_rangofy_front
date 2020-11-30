@@ -120,6 +120,7 @@ a{
     }
 `
 const CardLogin = styled(Card)`
+margin-bottom: 4rem;
 border: none;
 .card-header {
   text-align:center;

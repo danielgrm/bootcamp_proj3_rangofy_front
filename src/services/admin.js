@@ -28,7 +28,7 @@ const deleteRestoID = (id) => http.delete(`/admin/resto/${id}`)
 //POST like by id
 const like = (id) => http.post(`/likes/${id}`)
 
-//POST like by id
+//POST dislike by id
 const dislike = (id) => http.post(`/dislikes/${id}`)
 
 

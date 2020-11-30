@@ -57,7 +57,9 @@ const PerfilRestaurante = (props) => {
         {isLoading
           ? <Loading />
           : <>
+          
             <TopTitle title={restoProfile.nome} subtitle={restoProfile.instagram} />
+                        
             <Row>
               <Col sm={6}>
                 <TableRating responsive="sm">
@@ -127,3 +129,5 @@ th {
 }
 }
 `
+
+
