@@ -23,8 +23,15 @@ const saveToken = (data) => localStorage.setItem(TOKEN_KEY, JSON.stringify(data)
 const removeToken = () => localStorage.removeItem(TOKEN_KEY)
 
 const isAuthenticated = () => {
+    const data = JSON.parse(localStorage.getItem(TOKEN_KEY))
+    if (data && data.token) {
+        return true
+    }
+    return false
 
-    return getToken() !== null
+    
+
+    //return getToken() !== null
 }
 
 export {
