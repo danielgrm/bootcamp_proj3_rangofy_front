@@ -5,10 +5,12 @@ import history from '../../../config/history'
 import { authentication } from '../../../services/auth'
 import http from '../../../config/http'
 import { saveToken } from '../../../config/auth'
+import Swal from 'sweetalert2'
 
 const LoginAdmin = () => {
   const [form, setForm] = useState({})
   const [loading, setLoading] = useState(false)
+  //const [errorLogin, setErrorLogin] = useState("")
 
 
   const handleChange = (attr) => {
@@ -23,6 +25,12 @@ const LoginAdmin = () => {
   const isFormValid = () => form.email && form.senha
 
   const submitForm = async () => {
+    const message = (message) => Swal.fire({
+      position: 'center',
+      title: message,
+      showConfirmButton: false,
+      timer: 2000
+    })
     if (isFormValid()) {
       try {
         setLoading(true)
@@ -32,7 +40,16 @@ const LoginAdmin = () => {
         saveToken(data)
         history.push('/admin')
       } catch (error) {
-        console.log('error', error)
+        
+        const errorBack = error.response.data.errors
+        if (errorBack) {
+          const items = errorBack.map(item => item.msg)
+          
+          const msgError = items.toString()
+          console.log(msgError)
+           
+          message(msgError)       
+        }       
         setLoading(false)
 
       }
