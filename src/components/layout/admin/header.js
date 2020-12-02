@@ -28,51 +28,51 @@ export default () => {
             icon: "",
             link: "/admin/usuarios"
         }
-      
-        
+
+
     ]
     return (
         <Header>
             <Container>
-            {isLogged
-                ?  <NavUser><FaRegUserCircle className="icon"/>
-                    {getUser().name}
-                    <button onClick={logout}><FaSignOutAlt/></button>
+                {isLogged
+                    ? <NavUser><FaRegUserCircle className="icon" />
+                        {getUser().name}
+                        <button onClick={logout}><FaSignOutAlt /></button>
                     </NavUser>
-                : ""
+                    : ""
                 }
-            <Navbar collapseOnSelect expand="lg" variant="light">
-                <NavLink to={'/admin'}>
-                <Navbar.Brand>
-                    <Logo>
-                    <img src={LogoImg} alt="Asgard Health"/>
-                    <span>Rangofy</span>
-                    </Logo>
-                    </Navbar.Brand>
-                </NavLink>
-  
-  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-    <Nav>
-        {menu.map((item, i) => (
-            <NavLink exact={true} to={item.link} key={i}>
-                <Nav.Link as="div">{item.name}</Nav.Link>
-            </NavLink>
+                <Navbar collapseOnSelect expand="lg" variant="light">
+                    <NavLink to={'/admin'}>
+                        <Navbar.Brand>
+                            <Logo>
+                                <img src={LogoImg} alt="Asgard Health" />
+                                <span>Rangofy</span>
+                            </Logo>
+                        </Navbar.Brand>
+                    </NavLink>
 
-        ))}
-      
-      
-    </Nav>    
-  </Navbar.Collapse>
-</Navbar>
-</Container>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+                        <Nav>
+                            {menu.map((item, i) => (
+                                <NavLink exact={true} to={item.link} key={i}>
+                                    <Nav.Link as="div">{item.name}</Nav.Link>
+                                </NavLink>
+
+                            ))}
+
+
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </Container>
         </Header>
 
     )
 }
 
 const Header = styled.div`
-//margin-bottom: 3rem;
+
 
     
     a {
@@ -125,7 +125,7 @@ const Header = styled.div`
 
     .navbar-toggler-icon {
         
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(33,37,41, 1)' stroke-width='2' stroke-linecap='square' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(33,37,41, 1)' stroke-width='2' stroke-linecap='square' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
    
 `

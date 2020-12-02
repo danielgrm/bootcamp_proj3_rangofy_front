@@ -1,8 +1,8 @@
-import React, { useState, useEffect }from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import TopTitle from '../../../components/layout/title'
 import { listResto, like, dislike } from '../../../services/admin'
-import { Table, Container, Button} from 'react-bootstrap'
+import { Table, Container, Button } from 'react-bootstrap'
 import { BiLike, BiDislike } from 'react-icons/bi'
 import Loading from '../../../components/layout/loading'
 import Swal from 'sweetalert2'
@@ -10,121 +10,121 @@ import Swal from 'sweetalert2'
 const Avaliacoes = () => {
 
   const [restoList, setRestoList] = useState([])
-  const [isLoading, setIsLoading] = useState(false)   
-     
-  
-useEffect(() => {  
-  let get = async () => {
-    setIsLoading(true)
-    const resto = await listResto() 
-    setRestoList(resto.data)
-    setIsLoading(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+
+  useEffect(() => {
+    let get = async () => {
+      setIsLoading(true)
+      const resto = await listResto()
+      setRestoList(resto.data)
+      setIsLoading(false)
+    }
+
+    get()
+
+    return () => get = () => {
+    }
+
+  }, [])
+
+
+  const sortByName = restoList.sort(function (a, b) {
+    if (a.nome > b.nome) {
+      return 1
+    }
+    if (a.nome < b.nome) {
+      return -1
+    }
+    return 0
+  })
+
+
+  const darLike = async (id) => {
+    const message = (message) => Swal.fire({
+      position: 'center',
+      title: message,
+      showConfirmButton: false,
+      timer: 2000
+    })
+    try {
+      await like(id)
+      message(`Like! :)`)
+
+    } catch (error) {
+      message(`Ocorreu um erro..`)
+    }
+
   }
-  
-  get()
-  
-  return () => get = () => {
+
+  const darDislike = async (id) => {
+    const message = (message) => Swal.fire({
+      position: 'center',
+      title: message,
+      showConfirmButton: false,
+      timer: 2000
+    })
+    try {
+      await dislike(id)
+      message(`Dislike... :(`)
+
+    } catch (error) {
+      message(`Ocorreu um erro..`)
+    }
+
   }
-  
-}, [])
-  
-
-const sortByName = restoList.sort(function(a,b){
-  if (a.nome > b.nome) {
-    return 1
-  }
-  if (a.nome < b.nome) {
-    return -1
-  }
-  return 0
-})
-
-
-const darLike = async (id) => {
-  const message = (message) => Swal.fire({
-    position: 'center',    
-    title: message,
-    showConfirmButton: false,
-    timer: 2000
-  })   
-  try {      
-    await like(id) 
-    message(`Like! :)`)    
-      
-  } catch (error) {
-    message(`Ocorreu um erro..`)      
-  }        
-  
-}
-
-const darDislike = async (id) => {
-  const message = (message) => Swal.fire({
-    position: 'center',    
-    title: message,
-    showConfirmButton: false,
-    timer: 2000
-  })   
-  try {      
-    await dislike(id)
-    message(`Dislike... :(`)       
-        
-  } catch (error) {      
-    message(`Ocorreu um erro..`) 
-  }        
-  
-}
 
 
 
-    return (
-        <>                    
-                <TopTitle title="Participe!" subtitle="Avalie os restaurantes que você conhece"/>  
-                <Container>
-                {isLoading
-                ? <Loading/>
-                : <TableRating responsive="sm">
-                  
-                <thead>
-                  <tr>
-                    
-                    <th>NOME</th>
-                    <th>COZINHA</th>
-                    <th>BAIRRO</th>
-                    <th>INSTAGRAM</th>
-                    <th>VOTAR!</th>
-                    
-                    
-                  </tr>
-                </thead>
-                
-                <tbody>
-                {sortByName.map((rest, i) => (
-                  <tr key={i}>
-                  
+  return (
+    <>
+      <TopTitle title="Participe!" subtitle="Avalie os restaurantes que você conhece" />
+      <Container>
+        {isLoading
+          ? <Loading />
+          : <TableRating responsive="sm">
+
+            <thead>
+              <tr>
+
+                <th>NOME</th>
+                <th>COZINHA</th>
+                <th>BAIRRO</th>
+                <th>INSTAGRAM</th>
+                <th>VOTAR!</th>
+
+
+              </tr>
+            </thead>
+
+            <tbody>
+              {sortByName.map((rest, i) => (
+                <tr key={i}>
+
                   <td>{rest.nome}</td>
                   <td>{rest.cozinha}</td>
                   <td>{rest.endereco}</td>
                   <td>{rest.instagram}</td>
-                  <td><Button variant="info" onClick={() => darLike(rest._id)}><BiLike className="icon"/></Button><Button variant="danger"><BiDislike onClick={() => darDislike(rest._id)} className="icon"/></Button></td>                 
-                  
-                </tr>
-            
-                ))}
-                
-               
-                
-              </tbody>
-              
+                  <td><Button variant="info" onClick={() => darLike(rest._id)}><BiLike className="icon" /></Button><Button variant="danger"><BiDislike onClick={() => darDislike(rest._id)} className="icon" /></Button></td>
 
-                
-                </TableRating>
-              }
-                </Container>
-                
-            
-           
-        </>
-    )
+                </tr>
+
+              ))}
+
+
+
+            </tbody>
+
+
+
+          </TableRating>
+        }
+      </Container>
+
+
+
+    </>
+  )
 }
 
 

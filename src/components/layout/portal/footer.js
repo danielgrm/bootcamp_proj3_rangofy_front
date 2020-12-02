@@ -9,29 +9,29 @@ export default () => {
         <Footer>
             <Container>
                 <FooterCopy>
-                <Row>
-    <Col sm={4}>
-    <div className="RRSS">
-                            <span>Follow</span>
-                            <FaInstagram className="icons"/>
-                            <FaFacebookSquare className="icons"/>
-                            <FaTwitter className="icons"/>                            
-                        </div>                        
-    </Col>
-    
-    <Col sm={4}>
-   
-    </Col>
-    <Col sm={4}>
-    <div className="copy">
-                            Desenvolvido por Daniel Goulart &amp; Bruno Kuchel
+                    <Row>
+                        <Col sm={4}>
+                            <div className="RRSS">
+                                <span>Follow</span>
+                                <FaInstagram className="icons" />
+                                <FaFacebookSquare className="icons" />
+                                <FaTwitter className="icons" />
+                            </div>
+                        </Col>
+
+                        <Col sm={4}>
+
+                        </Col>
+                        <Col sm={4}>
+                            <div className="copy">
+                                Desenvolvido por Daniel Goulart &amp; Bruno Kuchel
                         </div>
-    </Col>
-  </Row>
-                        
-                        
-            </FooterCopy>
-                
+                        </Col>
+                    </Row>
+
+
+                </FooterCopy>
+
             </Container>
         </Footer>
 
@@ -42,17 +42,11 @@ export default () => {
 const Footer = styled.div`
 background: #e8ecfd;
 color: #212529;
-    
-
 `
-
-
 
 const FooterCopy = styled.div`    
     width: 100%;    
     border-top: 3px solid #1b314c;
-    //margin-top: 20px;
-    
 
     .RRSS{
         padding-top: 15px;
@@ -69,8 +63,6 @@ const FooterCopy = styled.div`
         padding-top: 15px;
         font-size: 1em;
         text-align: left;
-    }
-
-    
+    }    
 `
 

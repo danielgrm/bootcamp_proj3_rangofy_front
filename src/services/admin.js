@@ -1,7 +1,6 @@
 import http from '../config/http'
 
 
-
 // POST user
 const addUser= (data) => http.post(`/admin/user`, data)
 // GET user
@@ -31,8 +30,11 @@ const like = (id) => http.post(`/likes/${id}`)
 //POST dislike by id
 const dislike = (id) => http.post(`/dislikes/${id}`)
 
+//GET likes by user
+const myLikes = () => http.get(`/likeslist`)
 
-
+//GET dislikes by user
+const myDislikes = () => http.get(`/dislikeslist`)
 
 
 export {
@@ -45,5 +47,7 @@ export {
     updateResto,
     deleteRestoID,
     like,
-    dislike    
+    dislike,
+    myLikes,
+    myDislikes    
 }

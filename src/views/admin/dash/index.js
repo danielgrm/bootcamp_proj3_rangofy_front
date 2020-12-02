@@ -7,27 +7,17 @@ import styled from 'styled-components'
 
 const Dash = () => {
     return (
-        <>
-            
+        <>           
                 <Container >
                     <Content>
                     <Jumbotron>
                         <Container>
                             <h1>Bem-vindo!</h1>
-                            <p>
-                            Aqui você pode gerenciar os restaurantes e os usuários
-    </p>
+                            <p>Aqui você pode gerenciar os restaurantes e os usuários</p>
                         </Container>
                     </Jumbotron>
-
                     </Content>
-                    
-
-                </Container>
-
-
-
-            
+                </Container>          
 
         </>
     )

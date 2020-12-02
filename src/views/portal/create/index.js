@@ -1,12 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Container, Card, Button, Col, Row, Form, Spinner } from 'react-bootstrap'
 import Swal from 'sweetalert2'
 import styled from 'styled-components'
 import { addUser } from '../../../services/admin'
 import history from '../../../config/history'
-
-//
-
 
 
 const CreateUser = () => {
@@ -19,91 +16,91 @@ const CreateUser = () => {
   const handleChange = (attr) => {
     const { value, name } = attr.target
     setForm({
-        ...form,
-        [name]: value
+      ...form,
+      [name]: value
     })
     return
-}
+  }
 
-const isFormValid = () => form.nome && form.email && form.senha
+  const isFormValid = () => form.nome && form.email && form.senha
 
-const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-const submitForm = async() => {
-  const message = (type, message) => Swal.fire({
-    position: 'center',
-    //icon: type || 'success',
-    title: message || `Conta criada com sucesso!`,
-    showConfirmButton: false,
-    timer: 2500
-})
+  const submitForm = async () => {
+    const message = (type, message) => Swal.fire({
+      position: 'center',
+      //icon: type || 'success',
+      title: message || `Conta criada com sucesso!`,
+      showConfirmButton: false,
+      timer: 2500
+    })
 
-  
-    if(isFormValid()){
+
+    if (isFormValid()) {
       try {
         setLoading(true)
         await addUser(form)
         message('success', `Conta criada com sucesso!`)
         history.push('/avaliar')
-    
-    
-    
-  } catch (error) {
-    message('error', `Erro ao cadastrar`)
-    setLoading(false)
-    
+
+
+
+      } catch (error) {
+        message('error', `Erro ao cadastrar`)
+        setLoading(false)
+
+      }
+    }
   }
-}
-}
 
-const pressEnter = (event) => event.key === 'Enter' ? submitForm() : null
+  const pressEnter = (event) => event.key === 'Enter' ? submitForm() : null
 
 
-    return (
-        <>
-            
-                <Container className="h-100" >
-                    <Content>
-                    <Row>
-    <Col></Col>
+  return (
+    <>
 
-    <Col>    
-    <CardLogin >
-  <Card.Header>CADASTRE-SE!</Card.Header>
-  <Card.Body>
-  <Form.Group>
-    <Form.Label>Nome</Form.Label>
-    <Form.Control type="text" name="nome" placeholder="Insira o seu nome" onChange={handleChange} value={form.nome || ""} disabled={loading} onKeyPress={pressEnter}/>    
-  </Form.Group>    
-    <Form.Group>
-    <Form.Label>Email</Form.Label>
-    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""} disabled={loading} onKeyPress={pressEnter}/>    
-  </Form.Group>
+      <Container className="h-100" >
+        <Content>
+          <Row>
+            <Col></Col>
 
-  <Form.Group >
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""} disabled={loading} onKeyPress={pressEnter}/>
-  </Form.Group>
-    <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading? (<SpinnerLoading animation="border" size="sm"/>):"CADASTRAR"}</Button>
-  </Card.Body>
-</CardLogin>
-    </Col>
-    <Col></Col>
-  </Row>
-                    
-                    
+            <Col>
+              <CardLogin >
+                <Card.Header>CADASTRE-SE!</Card.Header>
+                <Card.Body>
+                  <Form.Group>
+                    <Form.Label>Nome</Form.Label>
+                    <Form.Control type="text" name="nome" placeholder="Insira o seu nome" onChange={handleChange} value={form.nome || ""} disabled={loading} onKeyPress={pressEnter} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" name="email" placeholder="Insira o seu email" onChange={handleChange} value={form.email || ""} disabled={loading} onKeyPress={pressEnter} />
+                  </Form.Group>
 
-                    </Content>
-                    
-
-                </Container>
+                  <Form.Group >
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" name="senha" placeholder="Insira o password" onChange={handleChange} value={form.senha || ""} disabled={loading} onKeyPress={pressEnter} />
+                  </Form.Group>
+                  <Button variant="primary" block disabled={!isFormValid()} onClick={submitForm}>{loading ? (<SpinnerLoading animation="border" size="sm" />) : "CADASTRAR"}</Button>
+                </Card.Body>
+              </CardLogin>
+            </Col>
+            <Col></Col>
+          </Row>
 
 
 
-            
+        </Content>
 
-        </>
-    )
+
+      </Container>
+
+
+
+
+
+    </>
+  )
 }
 
 

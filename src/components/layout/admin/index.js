@@ -4,17 +4,17 @@ import Header from './header'
 import Footer from './footer'
 import styled from 'styled-components'
 
-const Layout = ({ children }) =>{
+const Layout = ({ children }) => {
     return (
         <>
-        <Content>
-        <Header/>
-        <Main>
-            { children }
-        </Main>
-        
-        <Footer/>
-        </Content>
+            <Content>
+                <Header />
+                <Main>
+                    {children}
+                </Main>
+
+                <Footer />
+            </Content>
         </>
 
     )

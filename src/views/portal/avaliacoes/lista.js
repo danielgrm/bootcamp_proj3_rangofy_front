@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { listRestoID } from '../../../services/admin'
+import { myDislikes, myLikes } from '../../../services/admin'
 import { Table, Container, Row, Col } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+
+
 import Loading from '../../../components/layout/loading'
 import TopTitle from '../../../components/layout/title'
 
 
-const PerfilRestaurante = (props) => {
+const MinhasAvaliacoes = () => {
 
-  const [restoProfile, setRestoProfile] = useState({})
+
   const [isLoading, setIsLoading] = useState(false)
-  const { _id } = useParams()
-
+  const [euCurto, setEuCurto] = useState([])
+  const [naoCurto, setNaoCurto] = useState([])
 
   useEffect(() => {
 
     let get = async () => {
       setIsLoading(true)
-      const resto = await listRestoID(_id)
-      setRestoProfile(resto.data)
+      const likes = await myLikes()
+      const dislike = await myDislikes()
+      setEuCurto(likes.data)
+      setNaoCurto(dislike.data)
       setIsLoading(false)
     }
 
@@ -28,38 +31,22 @@ const PerfilRestaurante = (props) => {
     return () => get = () => {
     }
 
-  }, [_id])
+  }, [])
 
 
-  const mountUserLike = (data) => {
-    if (data.userlike) {
 
-      return data.userlike.map((it, i) =>
-        <tr key={i}>
-          <td>{it.email}</td>
-        </tr>)
-    }
-  }
 
-  const mountUserDislike = (data) => {
-    if (data.userdislike) {
-
-      return data.userdislike.map((it, i) =>
-        <tr key={i}>
-          <td>{it.email}</td>
-        </tr>)
-    }
-  }
 
   return (
+
     <>
+
       <Container>
-        {isLoading
-          ? <Loading />
-          : <>
-
-            <TopTitle title={restoProfile.nome} subtitle={restoProfile.instagram} />
-
+        <>
+          <TopTitle title="Minhas avaliações" />
+          {isLoading
+            ? <Loading />
+            :
             <Row>
               <Col sm={6}>
                 <TableRating responsive="sm">
@@ -68,8 +55,14 @@ const PerfilRestaurante = (props) => {
                       <th>LIKES</th>
                     </tr>
                   </thead>
+
                   <tbody>
-                    {mountUserLike(restoProfile)}
+                    {euCurto.map((item, i) => (
+                      <tr key={i}>
+                        <td>{item.nome}</td>
+                      </tr>
+                    ))}
+
                   </tbody>
                 </TableRating>
               </Col>
@@ -81,13 +74,19 @@ const PerfilRestaurante = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {mountUserDislike(restoProfile)}
+                    {naoCurto.map((item, i) => (
+                      <tr key={i}>
+                        <td>{item.nome}</td>
+                      </tr>
+                    ))}
+
                   </tbody>
                 </TableRating>
               </Col>
             </Row>
-          </>
-        }
+          }
+        </>
+
       </Container>
     </>
   )
@@ -95,7 +94,7 @@ const PerfilRestaurante = (props) => {
 
 
 
-export default PerfilRestaurante
+export default MinhasAvaliacoes
 
 const TableRating = styled(Table)`
 th {
@@ -129,5 +128,3 @@ th {
 }
 }
 `
-
-
