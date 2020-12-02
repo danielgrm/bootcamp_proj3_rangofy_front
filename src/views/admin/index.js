@@ -16,8 +16,7 @@ export default (props) => {
             <Route exact basename={props.match.path} path={props.match.path + '/'} component={Dash}/>
             <Route exact basename={props.match.path} path={props.match.path + '/restaurantes'} component={Restaurantes}/>            
             <Route exact basename={props.match.path} path={props.match.path + '/restaurantes/:_id'} component={Perfil}/>
-            <Route exact basename={props.match.path} path={props.match.path + '/usuarios'} component={Usuarios}/>       
-            
+            <Route exact basename={props.match.path} path={props.match.path + '/usuarios'} component={Usuarios}/>             
         </Layout>
     )
 }

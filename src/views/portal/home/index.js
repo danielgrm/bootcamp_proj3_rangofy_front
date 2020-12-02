@@ -14,9 +14,7 @@ const Home = () => {
                     <Jumbotron>
                         <Container>
                             <h1>Bateu um rangão maravilhoso?</h1>
-                            <p>
-                            Dá um jóinha e avalie a sua experiência!
-    </p>
+                            <p>Dá um jóinha e avalie a sua experiência!</p>
                         </Container>
                     </Jumbotron>
 
@@ -25,20 +23,11 @@ const Home = () => {
                     <Jumbotron>
                         <Container>
                             <h1>Deu aquela larica e não sabe aonde ir?</h1>
-                            <p>
-                            Olha o que a galera recomenda pra você!
-    </p>
+                            <p>Olha o que a galera recomenda pra você!</p>
                         </Container>
                     </Jumbotron>
-
-                    </Content>
-                    
-
-                </Container>
-
-
-
-            
+                    </Content>                
+                </Container>            
 
         </>
     )

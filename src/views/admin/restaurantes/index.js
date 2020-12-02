@@ -20,26 +20,18 @@ const Restaurantes = () => {
     const newResto = () => {
         setUpdate(false)
         setIsForm(!isForm)
-    } 
- 
+    }
+
     return (
-        <>        
-                <TopTitle title={isForm ? "Cadastro de restaurantes" : "Lista de restaurantes" } />  
-                <Nav>
-                
+        <>
+            <TopTitle title={isForm ? "Cadastro de restaurantes" : "Lista de restaurantes"} />
+            <Nav>
                 <Button size="sm" variant="info" onClick={() => newResto()}>{!isForm ? "NOVO" : "LISTA"}</Button>
-                
-                
-                </Nav>
-                
-                { isForm
+            </Nav>
+            { isForm
                 ? <CreateResto update={update} />
                 : <ListaRestaurantes updateResto={updateResto} />
             }
-
-                
-
-           
         </>
     )
 }

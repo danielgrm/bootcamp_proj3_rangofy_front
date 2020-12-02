@@ -3,18 +3,15 @@ import {  Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
 
 
-const Loading = ({ title, subtitle }) => {
-    return (
-        <>
-                            
-                <ContainerLoading>
-                  <Spinner animation="border" size="xl"/>    
-                </ContainerLoading>
-            
+const Loading = () => {
+    return (      
+        <>                            
+          <ContainerLoading>
+            <Spinner animation="border" size="xl"/>    
+          </ContainerLoading>            
         </>
     )
 }
-
 
 
 export default Loading

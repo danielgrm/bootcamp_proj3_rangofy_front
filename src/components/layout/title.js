@@ -34,14 +34,10 @@ const Title = styled.div`
         font-family: 'Archivo Black', sans-serif;    
     font-size: 2em;
 
-    }
-    
+    }    
 `
 const Subtitle = styled.div`
 h2 {
     font-size: 1.5em;
 }
-
-
-
 `

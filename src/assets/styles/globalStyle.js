@@ -7,12 +7,10 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         outline: 0;
-        -webkit-font-smoothing: antialiased;
-        //background: #e8ecfd;
+        -webkit-font-smoothing: antialiased;        
         font-family: 'Questrial', sans-serif;
-    }
-    
+    }    
     `
 
-    export default GlobalStyle 
+export default GlobalStyle 
     
