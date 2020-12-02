@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 const LoginAdmin = () => {
   const [form, setForm] = useState({})
   const [loading, setLoading] = useState(false)
-  //const [errorLogin, setErrorLogin] = useState("")
+  
 
 
   const handleChange = (attr) => {

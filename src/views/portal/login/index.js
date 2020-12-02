@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Container, Card, Button, Col, Row, Form, Dropdown, Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
 import history from '../../../config/history'
-//import styled from 'styled-components'
+import Swal from 'sweetalert2'
+
 
 import { authentication } from '../../../services/auth'
 import http from '../../../config/http'
@@ -25,6 +26,12 @@ const LoginUser = () => {
   const isFormValid = () => form.email && form.senha
 
   const submitForm = async () => {
+    const message = (message) => Swal.fire({
+      position: 'center',
+      title: message,
+      showConfirmButton: false,
+      timer: 2000
+    })
     if (isFormValid()) {
       try {
         setLoading(true)
@@ -34,7 +41,15 @@ const LoginUser = () => {
         saveToken(data)
         history.push('/avaliar')
       } catch (error) {
-        console.log('error', error)
+        
+        const errorBack = error.response.data.errors
+        if (errorBack) {
+          const items = errorBack.map(item => item.msg)          
+          const msgError = items.toString()
+          console.log(msgError)
+           
+          message(msgError)       
+        }       
         setLoading(false)
 
       }
