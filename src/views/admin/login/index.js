@@ -43,8 +43,7 @@ const LoginAdmin = () => {
         
         const errorBack = error.response.data.errors
         if (errorBack) {
-          const items = errorBack.map(item => item.msg)
-          
+          const items = errorBack.map(item => item.msg)          
           const msgError = items.toString()
           console.log(msgError)
            
