@@ -52,7 +52,8 @@ const Avaliacoes = () => {
       message(`Like! :)`)
 
     } catch (error) {
-      message(`Ocorreu um erro..`)
+      const errorBack = error.response.data.error 
+      message(errorBack)           
     }
 
   }
@@ -69,7 +70,8 @@ const Avaliacoes = () => {
       message(`Dislike... :(`)
 
     } catch (error) {
-      message(`Ocorreu um erro..`)
+      const errorBack = error.response.data.error 
+      message(errorBack)
     }
 
   }
